@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <title>Tagger</title>
+  </head>
+  <body>
+    <ul>
+        <% @selected_tags.each do |tag| %>
+            <li><%= tag %></li>
+        <% end %>
+    </ul>
+
+    <div>Found <%= @results.count() %></div>
+
+    <ul>
+        <% @results.limit(50).each do |result| %>
+            <li><%= result %></li>
+        <% end %>
+    </ul>
+  </body>
+</html>
