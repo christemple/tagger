@@ -1,33 +1,72 @@
 <html>
   <head>
     <title>Tagger</title>
+    <link href="/style.css" type="text/css" rel=stylesheet>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
   </head>
   <body>
+    <form id="tags" method="post" action="/">
+        <div class="tag_wrapper">
+            <input name="enter_tags" type="text" />
+            <div class=tags_found>
+                <% $tagger.distinct('tags').sort().each do |distinct_tag| %>
+                    <div class="available_tag" data-available-tag="<%= distinct_tag %>"><%= distinct_tag %></div>
+                <% end %>
+            </div>
+            <div class=drop_down_button><span class="arrow"></span> </div>
+        </div>
+        <button>Submit</button>
+    </form>
+
     <div><%= $tagger.count() %> records</div>
 
     <form id="selected_tag">
         <select name=tag>
-            <% $tagger.distinct('tags').each do |distinct_tag| %>
+            <% $tagger.distinct('tags').sort().each do |distinct_tag| %>
                 <option value="<%= distinct_tag %>"><%= distinct_tag %></option>
             <% end %>
         </select>
         <button>Submit</button>
     </form>
 
-    <form id="tags" method="post" action="/">
-        <button>Submit</button>
-    </form>
 
     <script type="text/javascript">
+        function add_tag_to_list(selected_tag) {
+            var add_tag_html = '<input name="selected_tags[]" data-selected-tag="'+ selected_tag +'" value="'+ selected_tag +'" type="hidden" />';
+            add_tag_html += '<div class=selected_tag data-selected-tag="'+ selected_tag +'">' + selected_tag + '<span class=remove_selected_tag>x</span></div>';
+            $('#tags .tag_wrapper input[name="enter_tags"]').before(add_tag_html);
+        }
+
+        function remove_tag_from_list(selected_tag) {
+            $('*[data-selected-tag="'+ selected_tag +'"]').remove();
+            $('*[data-available-tag="'+ selected_tag +'"]').removeClass('disabled');
+        }
+
         $('#selected_tag').submit(function(e){
             e.preventDefault();
-            function add_tag_to_list(selected_tag) {
-                $('#tags').prepend('<input name="selected_tags[]" type="text" value="' + selected_tag + '" />');
-            }
-
             var selected_tag = $(this).find('option:selected').val();
             add_tag_to_list(selected_tag);
+        });
+
+        $('.tag_wrapper').click(function(){
+            $(this).find('input[name="enter_tags"]').focus();
+        });
+
+        $('.drop_down_button').click(function(){
+            $('.tags_found').toggle();
+        });
+
+        $('.available_tag').click(function(){
+            if (!$(this).hasClass('disabled')) {
+                add_tag_to_list($(this).text());
+                $(this).addClass('disabled');
+            }
+        });
+
+        $('body').on("click", ".remove_selected_tag", function(e){
+            var tag_being_removed = $(this).parent().data('selected-tag');
+            remove_tag_from_list(tag_being_removed);
+            $(this).parent().remove();
         });
     </script>
 

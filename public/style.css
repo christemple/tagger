@@ -1,0 +1,115 @@
+body {
+    font-family: sans-serif;
+    font-size: 14px;
+    background-color: #fcf8f7;
+}
+
+ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+.tags_found {
+    display: none;
+    position: absolute;
+    background-color: white;
+    margin-top: 9px;
+    padding-top: 9px;
+}
+.drop_down_button {
+    float: right;
+    width: 35px;
+    height: 34px;
+    margin-right: -5px;
+    margin-top: -5px;
+    cursor: pointer;
+    background: #ffffff;
+    border-left: 1px solid lightgray;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#ededed)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #ffffff 0%,#ededed 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #ffffff 0%,#ededed 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #ffffff 0%,#ededed 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #ffffff 0%,#ededed 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
+}
+
+.tags_found li {
+    display: inline-block;
+}
+
+.drop_down_button .arrow {
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid gray;
+    top: 22px;
+    position: relative;
+    left: 12px;
+}
+
+#tags .tag_wrapper {
+    float: left;
+    width: 95%;
+    padding: 5px 5px 0 0;
+    border: 1px lightgray solid;
+    background-color: white;
+    cursor: text;
+    min-height: 29px;
+    position: relative;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+}
+
+.selected_tag {
+    border: none;
+    text-align: center;
+    background-color: #6285cb;
+    color: white;
+    border-radius: 3px;
+    padding: 4px 10px;
+    margin: 0px 0 5px 4px;
+    float: left;
+}
+
+.available_tag {
+    border: none;
+    text-align: center;
+    background-color: #6285cb;
+    color: white;
+    border-radius: 3px;
+    padding: 4px 10px;
+    margin: 0px 0 5px 4px;
+    float: left;
+    cursor: pointer;
+}
+.available_tag:hover {
+    background-color: #567ECB;
+}
+
+.remove_selected_tag {
+    cursor: pointer;
+    margin-left: 8px;
+    font-weight: bold;
+}
+
+.available_tag.disabled {
+    cursor: default;
+    background-color: #c3c1cb;
+}
+
+#tags input {
+    margin-left: 5px;
+    padding-left: 5px;
+    border: none;
+}
+#tags input:focus{
+    outline: 0;
+}
+
