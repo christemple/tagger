@@ -1,40 +1,34 @@
 <html>
   <head>
     <title>Tagger</title>
-    <link href="/css/style.css" type="text/css" rel=stylesheet>
+      <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.1.0/pure-min.css">
+      <link href="/css/style.css" rel=stylesheet>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
   </head>
   <body>
-    <form id="tags" method="post" action="/">
-        <div class="tag_wrapper">
-            <input name="enter_tags" type="text" />
-            <div class=tags_found>
-                <% $tagger.distinct('tags').sort().each do |distinct_tag| %>
-                    <div class="available_tag" data-available-tag="<%= distinct_tag %>"><%= distinct_tag %></div>
-                <% end %>
-            </div>
-            <div class=drop_down_button><span class="arrow"></span> </div>
+
+    <div class=pure-g>
+        <div class=pure-u-1 id=tag_selector>
+            <form id="tags" method="post" action="/">
+                <div class="tag_wrapper">
+                    <div class=selected_tags></div>
+                    <div class=available_tags>
+                        <% $tagger.distinct('tags').sort().each do |distinct_tag| %>
+                            <div class="available_tag" data-available-tag="<%= distinct_tag %>"><%= distinct_tag %></div>
+                        <% end %>
+                    </div>
+                    <div class=drop_down_button><span class="arrow"></span></div>
+                </div>
+                <button class=refresh_button><span class=refresh></span></button>
+            </form>
         </div>
-        <button class=refresh_button><span class=refresh></span></button>
-    </form>
-
-    <div><%= $tagger.count() %> records</div>
-
-    <form id="selected_tag">
-        <select name=tag>
-            <% $tagger.distinct('tags').sort().each do |distinct_tag| %>
-                <option value="<%= distinct_tag %>"><%= distinct_tag %></option>
-            <% end %>
-        </select>
-        <button>Submit</button>
-    </form>
-
+    </div>
 
     <script type="text/javascript">
         function add_tag_to_list(selected_tag) {
             var add_tag_html = '<input name="selected_tags[]" data-selected-tag="'+ selected_tag +'" value="'+ selected_tag +'" type="hidden" />';
             add_tag_html += '<div class=selected_tag data-selected-tag="'+ selected_tag +'">' + selected_tag + '<span class=remove_selected_tag>x</span></div>';
-            $('#tags .tag_wrapper input[name="enter_tags"]').before(add_tag_html);
+            $('.selected_tags').append(add_tag_html);
         }
 
         function remove_tag_from_list(selected_tag) {
@@ -42,12 +36,7 @@
             $('*[data-available-tag="'+ selected_tag +'"]').removeClass('disabled');
         }
 
-        $('#selected_tag').submit(function(e){
-            e.preventDefault();
-            var selected_tag = $(this).find('option:selected').val();
-            add_tag_to_list(selected_tag);
-        });
-
+        $('.refresh_button').click(function(){ $('#tags').submit(); });
         $('#tags').submit(function(e){
             if ($(this).serializeArray().length == 1) {
                 return false;
@@ -55,7 +44,7 @@
         });
 
         $('.drop_down_button').click(function(){
-            $('.tags_found').toggle();
+            $('.available_tags').toggle();
         });
 
         $('.available_tag').click(function(){
