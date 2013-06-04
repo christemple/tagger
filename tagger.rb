@@ -5,7 +5,12 @@ require 'thin'
 require 'mongo'
 require 'helpers'
 
-configure do
+configure :development do
+  set :port, 3000
+  set :root, File.dirname(__FILE__)
+end
+
+configure :production do
   set :port, 3000
   set :root, File.dirname(__FILE__)
 end
@@ -22,6 +27,7 @@ include Mongo
 $tagger = MongoClient.new.db('test').collection('tagger')
 
 get '/' do
+  puts "Config: #{settings.environment}"
   erb :index
 end
 
