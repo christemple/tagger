@@ -1,7 +1,9 @@
+$LOAD_PATH.unshift File.expand_path('lib')
 require 'sinatra'
 require 'sinatra/assetpack'
 require 'thin'
 require 'mongo'
+require 'helpers'
 
 configure do
   set :port, 3000

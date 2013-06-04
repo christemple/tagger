@@ -1,0 +1,16 @@
+<div class=pure-g>
+    <div class=pure-u-1 id=tag_selector>
+        <form id="tags" method="post" action="/">
+            <div class="tag_wrapper">
+                <div class=selected_tags></div>
+                <div class=available_tags>
+                    <% $tagger.distinct('tags').sort().each do |distinct_tag| %>
+                        <div class="available_tag" data-available-tag="<%= distinct_tag %>"><%= distinct_tag %></div>
+                    <% end %>
+                </div>
+                <div class=drop_down_button><span class="arrow"></span></div>
+            </div>
+            <button class=refresh_button><span></span></button>
+        </form>
+    </div>
+</div>
