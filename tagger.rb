@@ -15,6 +15,8 @@ configure :production do
   set :root, File.dirname(__FILE__)
 end
 
+puts "Config: #{settings.environment}"
+
 register Sinatra::AssetPack
 assets {
   css :app, ['/css/*.css']
@@ -27,7 +29,6 @@ include Mongo
 $tagger = MongoClient.new.db('test').collection('tagger')
 
 get '/' do
-  puts "Config: #{settings.environment}"
   erb :index
 end
 
