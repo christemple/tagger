@@ -37,10 +37,6 @@ ul, li {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
 }
 
-.tags_found li {
-    display: inline-block;
-}
-
 .drop_down_button .arrow {
     width: 0;
     height: 0;
@@ -50,6 +46,28 @@ ul, li {
     top: 22px;
     position: relative;
     left: 12px;
+}
+
+.refresh_button {
+    margin: 0 0 0 10px;
+    padding: 0;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#ededed)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #ffffff 0%,#ededed 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #ffffff 0%,#ededed 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #ffffff 0%,#ededed 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #ffffff 0%,#ededed 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
+}
+
+.refresh {
+    height: 34px;
+    width: 34px;
+    background: url("/images/refresh.png") no-repeat center center;
+    background-size: 22px;
+    display: block;
 }
 
 #tags .tag_wrapper {
@@ -65,6 +83,10 @@ ul, li {
     border-bottom-right-radius: 5px;
     -webkit-border-top-right-radius: 5px;
     -webkit-border-bottom-right-radius: 5px;
+}
+
+.tags_found li {
+    display: inline-block;
 }
 
 .selected_tag {

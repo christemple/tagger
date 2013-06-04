@@ -1,7 +1,7 @@
 <html>
   <head>
     <title>Tagger</title>
-    <link href="/style.css" type="text/css" rel=stylesheet>
+    <link href="/css/style.css" type="text/css" rel=stylesheet>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
   </head>
   <body>
@@ -15,7 +15,7 @@
             </div>
             <div class=drop_down_button><span class="arrow"></span> </div>
         </div>
-        <button>Submit</button>
+        <button class=refresh_button><span class=refresh></span></button>
     </form>
 
     <div><%= $tagger.count() %> records</div>
@@ -48,8 +48,10 @@
             add_tag_to_list(selected_tag);
         });
 
-        $('.tag_wrapper').click(function(){
-            $(this).find('input[name="enter_tags"]').focus();
+        $('#tags').submit(function(e){
+            if ($(this).serializeArray().length == 1) {
+                return false;
+            }
         });
 
         $('.drop_down_button').click(function(){
