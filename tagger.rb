@@ -1,13 +1,22 @@
 require 'sinatra'
+require 'sinatra/assetpack'
 require 'thin'
 require 'mongo'
 
 configure do
   set :port, 3000
+  set :root, File.dirname(__FILE__)
 end
 
-include Mongo
+register Sinatra::AssetPack
+assets {
+  css :app, ['/css/*.css']
+  js :app, ['/js/*.js']
 
+  css_compression :css
+}
+
+include Mongo
 $tagger = MongoClient.new.db('test').collection('tagger')
 
 get '/' do

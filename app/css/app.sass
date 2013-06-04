@@ -1,0 +1,83 @@
+body
+  margin: 0
+  font-size: 14px
+  background-color: #eaeaea
+  font-family: sans-serif
+
+.drop_down_button
+  float: right
+  width: 35px
+  height: 34px
+  margin-right: -5px
+  margin-top: -5px
+  cursor: pointer
+  background: #ffffff
+  border-left: 1px solid lightgray
+  .arrow
+    width: 0
+    height: 0
+    top: 22px
+    left: 12px
+    position: relative
+    border-top: 8px solid gray
+    border-left: 6px solid transparent
+    border-right: 6px solid transparent
+
+.refresh_button
+  padding: 0
+  margin: 0 0 0 10px
+  border: 1px solid lightgray
+  span
+    width: 34px
+    height: 34px
+    display: block
+    background-size: 22px
+    background: url("/images/refresh.png") no-repeat center center
+
+
+#tags .tag_wrapper
+  width: 95%
+  cursor: pointer
+  position: relative
+  padding: 5px 5px 0 0
+  display: inline-block
+  background-color: white
+  border: 1px lightgray solid
+
+.selected_tag
+  border: none
+  text-align: center
+  background-color: #6285cb
+  color: white
+  border-radius: 3px
+  padding: 4px 10px
+  margin: 0px 0 5px 4px
+  float: left
+
+.available_tags
+  display: none
+  position: absolute
+  background-color: black
+  margin-top: 30px
+  padding: 10px 1px
+
+.available_tag
+  border: none
+  text-align: center
+  background-color: #6285cb
+  color: white
+  border-radius: 3px
+  padding: 4px 10px
+  margin: 0px 0 5px 4px
+  float: left
+  cursor: pointer
+  &:hover
+    background-color: #567ECB
+  &.disabled
+    cursor: default
+    background-color: #c3c1cb
+
+.remove_selected_tag
+  cursor: pointer
+  margin-left: 8px
+  font-weight: bold
