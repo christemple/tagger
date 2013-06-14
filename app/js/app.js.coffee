@@ -1,5 +1,5 @@
 add_tag_to_list = (selected_tag)->
-  add_tag_html = "<input name=selected_tags[] data-selected-tag=#{selected_tag} value=selected_tag type=hidden />"
+  add_tag_html = "<input name=selected_tags[] data-selected-tag=#{selected_tag} value=#{selected_tag} type=hidden />"
   add_tag_html += "<div class=selected_tag data-selected-tag=#{selected_tag}>#{selected_tag}<span class=remove_selected_tag>x</span></div>"
   $('.selected_tags').append(add_tag_html)
 
