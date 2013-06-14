@@ -2,13 +2,9 @@ $LOAD_PATH.unshift File.expand_path('lib')
 require 'sinatra'
 require 'sinatra/assetpack'
 require 'thin'
+require 'config'
 require 'mongo'
 require 'helpers'
-
-configure do
-  set :port, 3000
-  set :root, File.dirname(__FILE__)
-end
 
 register Sinatra::AssetPack
 assets {
@@ -19,7 +15,7 @@ assets {
 }
 
 include Mongo
-$tagger = MongoClient.new.db('test').collection('tagger')
+$tagger = MongoClient.new(settings.mongodb).db('test').collection('tagger')
 
 get '/' do
   erb :index
