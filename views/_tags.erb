@@ -1,17 +1,24 @@
-<% if @selected_tags %>
-    <ul>
-        <% @selected_tags.each do |tag| %>
-            <li><%= tag %></li>
+<div class=pure-g-r>
+    <% if @results %>
+        <% if @selected_tags %>
+            <ul>
+                <% @selected_tags.each do |tag| %>
+                    <li><%= tag %></li>
+                <% end %>
+            </ul>
         <% end %>
-    </ul>
 
-    <div>Found <%= @results.count() %></div>
-
-    <ul>
-        <% @results.limit(50).each do |result| %>
-            <li><%= result %></li>
-        <% end %>
-    </ul>
-<% else %>
-    <p>No tags have been selected!</p>
-<% end %>
+        <div class=pure-u-3-4>
+            <ul>
+                <% @results.limit(50).each do |result| %>
+                    <li><%= result %></li>
+                <% end %>
+            </ul>
+        </div>
+        <div class="pure-u-1-4 total_calls">
+            <div><%= @results.count() %></div>
+        </div>
+    <% else %>
+        <p>No tags have been selected!</p>
+    <% end %>
+</div>
