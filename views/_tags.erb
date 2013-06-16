@@ -1,8 +1,4 @@
-<html>
-  <head>
-    <title>Tagger</title>
-  </head>
-  <body>
+<% if @selected_tags %>
     <ul>
         <% @selected_tags.each do |tag| %>
             <li><%= tag %></li>
@@ -16,5 +12,6 @@
             <li><%= result %></li>
         <% end %>
     </ul>
-  </body>
-</html>
+<% else %>
+    <p>No tags have been selected!</p>
+<% end %>

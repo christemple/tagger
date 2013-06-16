@@ -33,7 +33,8 @@ end
 
 post '/' do
   @selected_tags = params['selected_tags']
-  @results = $tagger.find('tags' => {'$all' => @selected_tags})
-  erb :tags
+  all_tags = @selected_tags.clone << 'called_call_centre'
+  @results = $tagger.find('tags' => {'$all' => all_tags})
+  erb :index
 end
 
