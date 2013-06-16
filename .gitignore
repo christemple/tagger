@@ -5,3 +5,4 @@ tmp/
 *.iml
 *.ipr
 *.iws
+test/mongo_data.js

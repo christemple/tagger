@@ -10,6 +10,24 @@ task :heroku do
   fail 'Failed to push to Heroku' unless `git push heroku master -f`
 end
 
+desc 'Import MongoDB test data locally'
+task :mongodb_import do
+  system "mongo test/mongo_data.js"
+end
+
+desc 'Connect to MongoHQ'
+task :mongohq, :user, :password do |_,args|
+  fail "Need to provide 'user' and 'password'" unless args[:user] and args[:password]
+  system "mongo linus.mongohq.com:10000/app16209316 -u #{args[:user]} -p #{args[:password]}"
+end
+
+desc 'Import MongoDB test data to MongoHQ'
+task :mongohq_import, :user, :password do |_,args|
+  fail "Need to provide 'user' and 'password'" unless args[:user] and args[:password]
+  system "mongo linus.mongohq.com:10000/app16209316 -u #{args[:user]} -p #{args[:password]} test/mongo_data.js"
+end
+
+
 def start_application
   stop_application if application_running
 
