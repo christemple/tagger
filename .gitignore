@@ -2,3 +2,6 @@
 .sass-cache/*
 *.log
 tmp/
+*.iml
+*.ipr
+*.iws
