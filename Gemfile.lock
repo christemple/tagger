@@ -36,6 +36,7 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
+    rake (10.0.4)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     rubyzip (0.9.9)
@@ -64,6 +65,7 @@ DEPENDENCIES
   coffee-script
   heroku
   mongo
+  rake
   sass
   sinatra
   sinatra-assetpack
