@@ -4,6 +4,8 @@ GEM
     addressable (2.3.4)
     backports (3.3.1)
     bson (1.8.6)
+    bson_ext (1.8.6)
+      bson (~> 1.8.6)
     coffee-script (2.2.0)
       coffee-script-source
       execjs
@@ -58,6 +60,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bson_ext
   coffee-script
   heroku
   mongo
