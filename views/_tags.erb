@@ -14,13 +14,13 @@
     <div class=pure-g-r>
         <div class=pure-u-3-4>
             <ul>
-                <% @results.limit(50).each do |result| %>
+                <% @results.each do |result| %>
                     <li><%= result %></li>
                 <% end %>
             </ul>
         </div>
         <div class="pure-u-1-4 total_calls">
-            <div><%= @results.count() %></div>
+            <div><%= @total %></div>
         </div>
     </div>
 <% else %>

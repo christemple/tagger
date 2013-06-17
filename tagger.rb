@@ -21,9 +21,12 @@ get '/' do
 end
 
 post '/' do
-  @selected_tags = []
-  @selected_tags = params['selected_tags'] if params['selected_tags']
-  @results = $tagger.find(tags: {'$all' => @selected_tags}, called_call_centre: true).sort({ date_called: -1 })
+  @selected_tags = params['selected_tags'] || []
+  @results = $tagger.aggregate([{'$match' => { tags: {'$all' => @selected_tags}, called_call_centre: true }},
+                                {'$group' => {'_id' => '$date_called', 'total_calls' => {'$sum' => 1}}},
+                                {'$sort' => { _id: -1 }}
+                               ])
+  @total = @results.inject(0) {|total, result| total += result['total_calls'] }
   erb :index
 end
 
