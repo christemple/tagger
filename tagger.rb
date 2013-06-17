@@ -5,24 +5,13 @@ require 'thin'
 require 'config'
 require 'mongo'
 require 'helpers'
+require 'database'
 
 register Sinatra::AssetPack
 assets {
   css :app, ['/css/*.css']
   js :app, ['/js/*.js']
-
-  #css_compression :css
 }
-
-def get_tagger_collection
-  return @db_connection.collection('tagger') if @db_connection
-  db = URI.parse(settings.mongodb)
-  db_name = db.path.gsub(/^\//, '')
-  @db_connection = Mongo::MongoClient.new(db.host, db.port).db(db_name)
-  @db_connection.authenticate("user", "wombat")
-  @db_connection.collection('tagger')
-end
-
 
 include Mongo
 $tagger = get_tagger_collection
@@ -33,9 +22,8 @@ end
 
 post '/' do
   @selected_tags = []
-  @selected_tags << params['selected_tags'] if params['selected_tags']
-  all_tags = @selected_tags.clone << 'called_call_centre'
-  @results = $tagger.find('tags' => {'$all' => all_tags})
+  @selected_tags = params['selected_tags'] if params['selected_tags']
+  @results = $tagger.find(tags: {'$all' => @selected_tags}, called_call_centre: true).sort({ date_called: -1 })
   erb :index
 end
 

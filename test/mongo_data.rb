@@ -20,7 +20,7 @@ tags = reinstate_tags + new_bill_tags + product_additions_tags + product_removal
   mongo_line = "\"uuid\":\"#{"%08d" % (count + 1)}\""
   mongo_line += ",\"tags\":[" + tags_to_use.map { |tag| "\"#{tag}\"," }.join.gsub(/,$/, '') + "]"
   mongo_line += ",\"called_call_centre\":#{called_call_centre}"
-  mongo_line += ",\"date_called\":\"#{(0..30).to_a.sample}/06/2013\""
+  mongo_line += ",\"date_called\":\"#{format('%02d', (1..30).to_a.sample)}/06/2013\""
   tagger.puts "db.tagger.insert({#{mongo_line}});"
 end
 
