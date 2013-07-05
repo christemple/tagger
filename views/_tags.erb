@@ -13,11 +13,12 @@
 
     <div class=pure-g-r>
         <div class=pure-u-3-4>
-            <ul>
-                <% @results.each do |result| %>
-                    <li><%= result %></li>
-                <% end %>
-            </ul>
+            <canvas id="myChart" width="1280" height="500"></canvas>
+            <script>
+                $(document).ready(function(){
+                    new Chart($("#myChart").get(0).getContext("2d")).Line(<%= @chart_data %>);
+                });
+            </script>
         </div>
         <div class="pure-u-1-4 total_calls">
             <div><%= @total %></div>
