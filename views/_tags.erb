@@ -13,10 +13,18 @@
 
     <div class=pure-g-r>
         <div class=pure-u-3-4>
-            <canvas id="myChart" width="1280" height="500"></canvas>
+            <div id="myChart" style="width: 1280px; height: 500px"></div>
             <script>
                 $(document).ready(function(){
-                    new Chart($("#myChart").get(0).getContext("2d")).Line(<%= @chart_data %>);
+                    new Morris.Line({
+                        element: 'myChart',
+                        data: <%= @chart_data %>,
+                        xkey: 'day',
+                        xLabels: 'day',
+                        xLabelFormat: function(x) { return moment(x).format("MMMM Do")},
+                        ykeys: ['calls'],
+                        labels: ['Calls']
+                    });
                 });
             </script>
         </div>

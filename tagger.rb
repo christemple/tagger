@@ -6,6 +6,7 @@ require 'config'
 require 'mongo'
 require 'helpers'
 require 'database'
+require "json"
 
 register Sinatra::AssetPack
 assets {
@@ -26,22 +27,7 @@ post '/' do
                                 {'$group' => {'_id' => '$date_called', 'total_calls' => {'$sum' => 1}}},
                                 {'$sort' => { _id: 1 }}
                                ])
-  dates = @results.collect { |result| result["_id"] }
-  total_calls = @results.collect { |result| result["total_calls"] }
-  @chart_data = <<-JSON
-    {
-        "labels" : #{dates},
-        "datasets" : [
-            {
-                "fillColor" : "rgba(151,187,205,0.5)",
-                "strokeColor" : "rgba(151,187,205,1)",
-                "pointColor" : "rgba(151,187,205,1)",
-                "pointStrokeColor" : "#fff",
-                "data" : #{total_calls}
-            }
-        ]
-    }
-  JSON
+  @chart_data = @results.collect { |result| { day: DateTime.parse(result["_id"]).strftime("%Y-%m-%d"), calls: result["total_calls"] } }.to_json
   @total = @results.inject(0) {|total, result| total += result['total_calls'] }
   erb :index
 end
